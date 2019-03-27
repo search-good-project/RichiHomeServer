@@ -10,14 +10,14 @@ I also recommend [Jellyfin](https://jellyfin.github.io/) for a media hosting and
 
 This is all run on Ubuntu Server 19.04, so I can't gaurantee it'll work on different version. You must also have docker and docker-compose installed, which will vary across Distro's (though I used Snap).
 
-##### 1: Clone the repository, and other commands
+#### 1: Clone the repository, and other commands
 First, type this command in your terminal: 
 `git clone https://github.com/Richiachu/RichiHomeServer.git`
 This will copy the repository to the folder your in (likely your home/username folder).
 We also need to run some necessary docker commands. We need to create a network that traefik will use to talk and see other docker images. In this case, it's called web. The command for this is:
  `docker network create web`
 
-##### 2.1: Edit the necessary files - Traefik
+#### 2.1: Edit the necessary files - Traefik
 To begin we're going to edit our docker-compose files. I'll explain as we go along. First, we'll edit traefik.  
 Once we're in the right folder (RichiHomeServer/traefik), we'll edit our docker-compose file. I will be using nano, but you can use whatever you want (obligatory emacs vs vim comment aside).
 `nano docker-compose.yml`
@@ -153,7 +153,7 @@ We can test this now by running our docker-compose file. We'll do that using thi
 `docker-compose up -d`
 It should start up without a hitch. You can now connect to your traefik instance by heading to the domain you used in the compose file, likely traefik.domain.com. After typing in the username and password you set, you'll be able to connect to the traefik dashboard. This will update as you add more containers in docker, but that'll be done without you editing and of traefiks config.
 
-##### 2.1: Edit the necessary files - Services
+#### 2.1: Edit the necessary files - Services
 
 Let's head into our services folder now. We'll use the nano command to edit our docker-compose file first.
 `nano docker-compose.yml`
