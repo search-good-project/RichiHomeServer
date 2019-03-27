@@ -22,6 +22,7 @@ To begin we're going to edit our docker-compose files. I'll explain as we go alo
 Once we're in the right folder (RichiHomeServer/traefik), we'll edit our docker-compose file. I will be using nano, but you can use whatever you want (obligatory emacs vs vim comment aside).
 `nano docker-compose.yml`
 Let's analyze this file.
+
     version: '3'
     
     services:
