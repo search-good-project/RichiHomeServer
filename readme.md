@@ -6,7 +6,7 @@ I'll go through some quick details about why I'm running what I am. Traefik is u
 
 I'm running [Nextcloud](https://nextcloud.com/) as our file hosting service (using MariaDB for our database, though if it gives you trouble I'll recommend SQLite for it's ease). Nextcloud can be used as a desktop sync client, file storage, and more if you're willing to install apps.  
 
-I also recommend [Jellyfin](https://jellyfin.github.io/) for a media hosting and viewing, as it's FOSS (unlike emby and Plex) and has handled all media I've thrown at it so far.  
+I also recommend [Jellyfin](https://jellyfin.github.io/) for a media hosting and viewing solution, as it's FOSS (unlike emby and Plex) and has handled all media I've thrown at it so far.  
 
 This is all run on Ubuntu Server 19.04, so I can't gaurantee it'll work on different version. You must also have docker and docker-compose installed, which will vary across Distro's (though I used Snap).
 
