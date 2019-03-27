@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/username/RichiHomeServer/traefik/traefik.toml:/traefik.toml
+      - /home/username/RichiHomeServer/traefik/acme.json:/acme.json
+    container_name: traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.frontend.rule=Host:traefik.domain.xyz"
+      - "traefik.port=8080"
+      - "traefik.frontend.auth.basic=Username:$$2y$$05$$ztcHlOeJs.4JbPziBrG5MuP1lf3ddNP/qm06ByT9Fd4/xzldxYw/2"
+networks:
+  web:
+    external: true

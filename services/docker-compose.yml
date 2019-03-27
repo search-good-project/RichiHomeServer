@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=2f9fR-rdpMT-eygBd-7a5s7-dPZt2
+    env_file:
+      - db.env
+    networks:
+      - web
+      - internal
+
+  app:
+    image: nextcloud:latest
+    restart: always
+    volumes:
+      - ./nextcloud/data:/var/www/html
+    env_file:
+      - db.env
+    environment:
+      - MYSQL_HOST=db
+    depends_on:
+      - db
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.backend=nextcloud"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:nextcloud.domain.xyz"
+      - "traefik.port=80"
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    restart: always
+    volumes:
+      - /home/username/media/:/media
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=jellyfin"
+      - "traefik.frontend.rule=Host:media.domain.xyz"
+      - "traefik.port=8096"
+      - "traefik.protocol=http"
+      - "traefik.docker.network=web"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=domain.xyz"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.frameDeny=true"
+
+networks:
+  internal:
+  web:
+    external: true
+
+volumes:
+  db:
+  nextcloud:
