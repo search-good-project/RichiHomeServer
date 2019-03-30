@@ -1,23 +1,20 @@
-debug = false
-logLevel = "ERROR"
-
 defaultEntryPoints = ["http", "https"]
 
-[web]
-# Port for the status page
-address = ":8080"
-
 [entryPoints]
-    [entryPoints.http]
-    address = ":80"
-        [entryPoints.http.redirect]
-        entryPoint = "https"
-
-    [entryPoints.https]
-    address = ":443"
+  [entryPoints.dashboard]
+    address = ":8080"
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
     [entryPoints.https.tls]
-
+      [[entryPoints.https.tls.certificates]]
 [retry]
+
+[api]
+entrypoint="dashboard"
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
@@ -29,8 +26,11 @@ exposedByDefault = false
 email = "whatever@whatever.com"
 storage = "acme.json"
 entryPoint = "https"
-# onDemand = true
+  [acme.httpChallenge]
+  entryPoint = "https"
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
 onHostRule = true
+onDemand = false
 
 [acme.httpChallenge]
 entryPoint = "http"
