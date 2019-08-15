@@ -196,7 +196,7 @@ You should see the following:
           - "traefik.docker.network=web"
           - "traefik.enable=true"
           - "traefik.frontend.rule=Host:nextcloud.domain.xyz"
-          - "traefik.port=80"
+          - "traefik.port=8095"
     
       jellyfin:
         image: jellyfin/jellyfin
@@ -277,7 +277,7 @@ Continuing:
           - "traefik.frontend.headers.STSIncludeSubdomains=true"
           - "traefik.frontend.headers.STSPreload=true"
           - "traefik.frontend.headers.frameDeny=true"
-We have a few things to edit. You'll change the traefik.frontend.rule label from media.domain.xyz to your desired domain, as well as the traefik.frontend.headers.SSLHost label to your domain (not including the subdomain!). You don't need to edit anything else. You *might* need to port forward port 8096, but I don't think you have to. If you can connect to NC but not jellyfin, you can do that, or change traefik.port=8096 to traefik.port=80.  
+We have a few things to edit. You'll change the traefik.frontend.rule label from media.domain.xyz to your desired domain, as well as the traefik.frontend.headers.SSLHost label to your domain (not including the subdomain!). You don't need to edit anything else. If you can connect to NC but not jellyfin, you can do that, or change traefik.port=8096 to traefik.port=80.  
   
 We only have one more *potential* file to update! That will be db.env, if you feel the need (which you really shouldn't). If you choose too, I imagine you're smart enough to do it. Otherwise, don't worry.  
   
